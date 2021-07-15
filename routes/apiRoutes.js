@@ -8,7 +8,9 @@ router.get(`/notes`, (req, res) => {
     */
 
     const notes = JSON.parse(fs.readFileSync(`./db/db.json`, "utf-8"));
-    res.json(notesData);
+   // console.log(notes)
+    res.json(notes);
+    
     
 });
 
@@ -16,9 +18,12 @@ router.post("/notes", (req, res) => {
 
     // using notes run a function that will create a new note either using a spread operator or using an object created from the data receieved from the front end. 
     //HINT console log the request.body to create the object or use the spread operator. 
-    const note = createNewNote(req.body, notes);
-    res.json(note);
-    console.log(note);
+    const note = req.body;
+    const notes = JSON.parse(fs.readFileSync(`./db/db.json`, "utf-8"));
+    notes.push(note)
+    console.log(notes)
+    res.json(notes);
+   
 });
 
 
